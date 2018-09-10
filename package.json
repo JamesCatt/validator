@@ -1,0 +1,37 @@
+{
+  "name": "validator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "server": "./node_modules/http-server/bin/http-server ./"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-jest": "^23.4.2",
+    "babel-preset-env": "^1.7.0",
+    "http-server": "^0.11.1",
+    "jest": "^23.5.0",
+    "jest-cli": "^23.5.0",
+    "jest-puppeteer": "^3.3.1",
+    "puppeteer": "^1.7.0",
+    "regenerator-runtime": "^0.12.1"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+  "jest": {
+    "preset": "jest-puppeteer",
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/test/._validator.test.js"
+    ],
+    "testEnvironment": "jsdom",
+    "setupFiles": ["<rootDir>/src/validator.es6.js"]
+  }
+}
