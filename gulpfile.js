@@ -19,6 +19,10 @@ gulp.task('default', () => {
         gulp.dest('dist'),
 
     ],
-    (e) => {console.log(e)});
+    (e) => {
+        if (typeof e !== 'undefined') {
+            console.log(e);
+        }
+    });
 
 });
