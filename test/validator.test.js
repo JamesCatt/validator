@@ -117,128 +117,126 @@ describe("Test Constructor", () => {
 
 });
 
-
+/////////////////////////
+// Functionality tests //
+/////////////////////////
 
 describe("Test Functionality", () => {
 
-    test("calls options.requiredCallback with inputElement when required attribute set and test fails", async () => {
+    test("calls only options.requiredCallback with inputElement when required attribute set and test fails", async () => {
 
         let input = document.createElement('input');
         input.setAttribute('type', 'text');
         input.required = true;
-        const testCallback = jest.fn();
+        const testRequiredCallback = jest.fn();
+        const testPatternCallback = jest.fn();
+        const testSuccessCallback = jest.fn();
         let callbackTest = new Validator(input, {
-            requiredCallback: testCallback,
-        });
-        input.focus();
-        input.blur();
-
-        expect(testCallback).toHaveBeenCalledWith(input);
-
-    });
-
-    test("calls options.requiredCallback with inputElement when options.required set and test fails", async () => {
-
-        let input = document.createElement('input');
-        input.setAttribute('type', 'text');
-        const testCallback = jest.fn();
-        let callbackTest = new Validator(input, {
-            required: true,
-            requiredCallback: testCallback,
-        });
-        input.focus();
-        input.blur();
-
-        expect(testCallback).toHaveBeenCalledWith(input);
-
-    });
-
-    test("does not call options.requiredCallback when required test passes", async () => {
-
-        let input = document.createElement('input');
-        input.setAttribute('type', 'text');
-        const testCallback = jest.fn();
-        let callbackTest = new Validator(input, {
-            required: true,
-            requiredCallback: testCallback,
-        });
-        input.focus();
-        input.value = '111';
-        input.blur();
-
-        expect(testCallback).not.toHaveBeenCalled();
-
-    });
-
-    test("calls options.patternCallback with inputElement when pattern attribute set and test fails", async () => {
-
-        let input = document.createElement('input');
-        input.setAttribute('type', 'text');
-        input.setAttribute('pattern', '^[a-z]+$');
-        const testCallback = jest.fn();
-        let callbackTest = new Validator(input, {
-            patternCallback: testCallback,
-        });
-        input.focus();
-        input.value = '111';
-        input.blur();
-
-        expect(testCallback).toHaveBeenCalledWith(input);
-
-    });
-
-    test("calls options.patternCallback with inputElement when options.pattern set and test fails", async () => {
-
-        let input = document.createElement('input');
-        input.setAttribute('type', 'text');
-        const testCallback = jest.fn();
-        let callbackTest = new Validator(input, {
-            pattern: '[a-z]',
-            patternCallback: testCallback,
-        });
-        input.focus();
-        input.value = '111';
-        input.blur();
-
-        expect(testCallback).toHaveBeenCalledWith(input);
-
-    });
-
-    test("does not call options.patternCallback when pattern test passes", async () => {
-
-        let input = document.createElement('input');
-        input.setAttribute('type', 'text');
-        const testCallback = jest.fn();
-        let callbackTest = new Validator(input, {
+            requiredCallback: testRequiredCallback,
             pattern: '^[a-z]+$',
-            patternCallback: testCallback,
+            patternCallback: testPatternCallback,
+            successCallback: testSuccessCallback,
         });
         input.focus();
-        input.value = 'abc';
         input.blur();
 
-        expect(testCallback).not.toHaveBeenCalled();
+        expect(testRequiredCallback).toHaveBeenCalledWith(input);
+        expect(testPatternCallback).not.toHaveBeenCalled();
+        expect(testSuccessCallback).not.toHaveBeenCalled();
 
     });
 
-    test("does not call options.patternCallback when required test fails", async () => {
+    test("calls only options.requiredCallback with inputElement when options.required set and test fails", async () => {
 
         let input = document.createElement('input');
         input.setAttribute('type', 'text');
         const testRequiredCallback = jest.fn();
         const testPatternCallback = jest.fn();
+        const testSuccessCallback = jest.fn();
         let callbackTest = new Validator(input, {
             required: true,
             requiredCallback: testRequiredCallback,
             pattern: '^[a-z]+$',
             patternCallback: testPatternCallback,
+            successCallback: testSuccessCallback,
         });
         input.focus();
-        input.value = '';
         input.blur();
 
-        expect(testRequiredCallback).toHaveBeenCalled();
+        expect(testRequiredCallback).toHaveBeenCalledWith(input);
         expect(testPatternCallback).not.toHaveBeenCalled();
+        expect(testSuccessCallback).not.toHaveBeenCalled();
+
+    });
+
+    test("calls only options.patternCallback with inputElement when pattern attribute set and test fails", async () => {
+
+        let input = document.createElement('input');
+        input.setAttribute('type', 'text');
+        input.setAttribute('pattern', '^[a-z]+$');
+        const testRequiredCallback = jest.fn();
+        const testPatternCallback = jest.fn();
+        const testSuccessCallback = jest.fn();
+        let callbackTest = new Validator(input, {
+            required: true,
+            requiredCallback: testRequiredCallback,
+            patternCallback: testPatternCallback,
+            successCallback: testSuccessCallback,
+        });
+        input.focus();
+        input.value = '111';
+        input.blur();
+
+        expect(testRequiredCallback).not.toHaveBeenCalled();
+        expect(testPatternCallback).toHaveBeenCalledWith(input);
+        expect(testSuccessCallback).not.toHaveBeenCalled();
+
+    });
+
+    test("calls only options.patternCallback with inputElement when options.pattern set and test fails", async () => {
+
+        let input = document.createElement('input');
+        input.setAttribute('type', 'text');
+        const testRequiredCallback = jest.fn();
+        const testPatternCallback = jest.fn();
+        const testSuccessCallback = jest.fn();
+        let callbackTest = new Validator(input, {
+            requiredCallback: testRequiredCallback,
+            pattern: '^[a-z]+$',
+            patternCallback: testPatternCallback,
+            successCallback: testSuccessCallback,
+        });
+        input.focus();
+        input.value = '111';
+        input.blur();
+
+        expect(testRequiredCallback).not.toHaveBeenCalled();
+        expect(testPatternCallback).toHaveBeenCalledWith(input);
+        expect(testSuccessCallback).not.toHaveBeenCalled();
+
+    });
+
+    test("calls only options.successCallback with inputElement when all tests pass", async () => {
+
+        let input = document.createElement('input');
+        input.setAttribute('type', 'text');
+        const testRequiredCallback = jest.fn();
+        const testPatternCallback = jest.fn();
+        const testSuccessCallback = jest.fn();
+        let callbackTest = new Validator(input, {
+            required: true,
+            requiredCallback: testRequiredCallback,
+            pattern: '^[a-z]+$',
+            patternCallback: testPatternCallback,
+            successCallback: testSuccessCallback,
+        });
+        input.focus();
+        input.value = 'abc';
+        input.blur();
+
+        expect(testRequiredCallback).not.toHaveBeenCalled();
+        expect(testPatternCallback).not.toHaveBeenCalled();
+        expect(testSuccessCallback).toHaveBeenCalledWith(input);
 
     });
 
@@ -248,11 +246,13 @@ describe("Test Functionality", () => {
         input.setAttribute('type', 'text');
         const testRequiredCallback = jest.fn();
         const testPatternCallback = jest.fn();
+        const testSuccessCallback = jest.fn();
         let callbackTest = new Validator(input, {
             required: true,
             requiredCallback: testRequiredCallback,
             pattern: '^[a-z]+$',
             patternCallback: testPatternCallback,
+            successCallback: testSuccessCallback,
         });
         callbackTest.disable();
         input.focus();
@@ -265,6 +265,7 @@ describe("Test Functionality", () => {
         input.blur();
 
         expect(testPatternCallback).not.toHaveBeenCalled();
+        expect(testSuccessCallback).not.toHaveBeenCalled();
 
     });
 
@@ -274,12 +275,14 @@ describe("Test Functionality", () => {
         input.setAttribute('type', 'text');
         const testRequiredCallback = jest.fn();
         const testPatternCallback = jest.fn();
+        const testSuccessCallback = jest.fn();
         let callbackTest = new Validator(input, {
+            autoInit: false,
             required: true,
             requiredCallback: testRequiredCallback,
             pattern: '^[a-z]+$',
             patternCallback: testPatternCallback,
-            autoInit: false,
+            successCallback: testSuccessCallback,
         });
 
         input.focus();
@@ -290,6 +293,7 @@ describe("Test Functionality", () => {
         input.value = '111';
         input.blur();
         expect(testPatternCallback).not.toHaveBeenCalled();
+        expect(testSuccessCallback).not.toHaveBeenCalled();
 
     });
 
