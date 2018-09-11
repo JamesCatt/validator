@@ -84,7 +84,22 @@
                         if (this.options.notices) {
                             console.log('Validator Notice: Element was set as required, but no patternCallback function was provided. Set options.notices = false to eliminate these messages.');
                         }
+
                     }
+
+                    return; // prevent successCallback from firing
+
+                        }
+                    }
+            try {
+
+                this.options.successCallback(this.inputEl);
+
+            } catch (e) {
+
+                if (this.options.notices) {
+
+                    console.log('Notice: All validation tests passed, but no successCallback was provided. Set options.notices = false to eliminate these messages.');
 
                 }
             }
