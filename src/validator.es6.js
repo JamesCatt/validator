@@ -10,6 +10,7 @@
      * @param {string} options.pattern - RegEx string for matching against the user input. If not set, constructor will check for pattern attribute.
      * @param {function} options.requiredCallback - Callback function if the input is blank when options.required === true.
      * @param {function} options.patternCallback - Callback function if the input doesn't match the options.pattern test.
+     * @param {function} options.successCallback - Callback function if the input passes all tests.
      * @param {boolean} options.autoInit - Automatically validate when inputEl is blurred. Defaults to true.
      * @param {boolean} options.notices - Log notices to the console of minor issues. Defaults to true.
      */
