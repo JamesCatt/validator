@@ -20,9 +20,7 @@
     "gulp-uglify": "^3.0.1",
     "jest": "^23.5.0",
     "jest-cli": "^23.5.0",
-    "jest-puppeteer": "^3.3.1",
     "pump": "^3.0.0",
-    "puppeteer": "^1.7.0",
     "regenerator-runtime": "^0.12.1"
   },
   "babel": {
@@ -31,7 +29,6 @@
     ]
   },
   "jest": {
-    "preset": "jest-puppeteer",
     "testPathIgnorePatterns": [
       "<rootDir>/node_modules/",
       "<rootDir>/test/._validator.test.js"
