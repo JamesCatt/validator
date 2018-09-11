@@ -5,12 +5,16 @@ const uglify = require('gulp-uglify');
 const pump = require('pump');
 const rename = require('gulp-rename');
 
+gulp.task('default', () => {
+    console.log('Gulp watching...');
+})
+
 gulp.task('test', () => {
     return gulp.src('src/validator.es6.js')
         .pipe(jest());
 });
 
-gulp.task('default', ['test'], () => {
+gulp.task('build', ['test'], () => {
     
     pump([
 
@@ -31,4 +35,4 @@ gulp.task('default', ['test'], () => {
 
 });
 
-var watcher = gulp.watch('js/**', ['default']);
+var watcher = gulp.watch(['src/**', 'test/**'], ['build']);
