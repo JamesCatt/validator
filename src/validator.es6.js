@@ -92,7 +92,7 @@
                     } catch (e) {
 
                         if (this.options.notices) {
-                            console.log('Validator Notice: Element was set as required, but no patternCallback function was provided. Set options.notices = false to eliminate these messages.');
+                            console.log('Validator Notice: Input failed the provided pattern, but no patternCallback function was provided. Set options.notices = false to eliminate these messages.');
                         }
 
                     }
@@ -113,7 +113,7 @@
                     console.log('Notice: All validation tests passed, but no successCallback was provided. Set options.notices = false to eliminate these messages.');
 
                 }
-                
+
             }
                 
 
