@@ -27,8 +27,7 @@
 
         this.options.pattern = this.options.pattern || this.inputEl.getAttribute('pattern');
 
-        this.options.required = this.options.required || this.inputEl.getAttribute('required');
-
+        this.options.required = this.options.required || this.inputEl.required;
 
         if (typeof this.options.autoInit === 'undefined') {
             this.options.autoInit = true;
@@ -38,7 +37,7 @@
             this.options.notices = true;
         }
 
-        if (this.options.pattern === null && this.options.required === null) {
+        if (this.options.pattern === null && this.options.required !== true) {
             throw new Error('either pattern must be set or field must be required');
         }
 

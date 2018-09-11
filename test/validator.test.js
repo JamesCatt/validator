@@ -125,10 +125,9 @@ describe("Test Functionality", () => {
 
         let input = document.createElement('input');
         input.setAttribute('type', 'text');
-        input.setAttribute('required', true);
+        input.required = true;
         const testCallback = jest.fn();
         let callbackTest = new Validator(input, {
-            //required: true,
             requiredCallback: testCallback,
         });
         input.focus();
