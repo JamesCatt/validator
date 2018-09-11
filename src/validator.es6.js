@@ -8,9 +8,9 @@
      * @param {Object} options - Options object to override defaults
      * @param {boolean} options.required - Set field to be explicitly required. If not set, constructor will check for required attribute on the element.
      * @param {string} options.pattern - RegEx string for matching against the user input. If not set, constructor will check for pattern attribute.
-     * @param {function} options.requiredCallback - Callback function if the input is blank when options.required === true.
-     * @param {function} options.patternCallback - Callback function if the input doesn't match the options.pattern test.
-     * @param {function} options.successCallback - Callback function if the input passes all tests.
+     * @param {function} options.requiredCallback - Callback function if the input is blank when options.required === true. Passes inputEl as the only argument.
+     * @param {function} options.patternCallback - Callback function if the input doesn't match the options.pattern test. Passes inputEl as the only argument.
+     * @param {function} options.successCallback - Callback function if the input passes all tests. Passes inputEl as the only argument.
      * @param {boolean} options.autoInit - Automatically validate when inputEl is blurred. Defaults to true.
      * @param {boolean} options.notices - Log notices to the console of minor issues. Defaults to true.
      */
