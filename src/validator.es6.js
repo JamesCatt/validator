@@ -64,7 +64,7 @@
 
             if (this.options.required && inputValue === '') {
                 try {
-                    this.options.requiredCallback();
+                    this.options.requiredCallback(this.inputEl);
                 } catch (e) {
                     if (this.options.notices) {
                         console.log('Validator Notice: Element was set as required, but no requiredCallback function was provided. Set options.notices = false to eliminate these messages.');
@@ -80,7 +80,7 @@
                 if (!testPattern.test(inputValue)) {
 
                     try {
-                        this.options.patternCallback();
+                        this.options.patternCallback(this.inputEl);
                     } catch (e) {
                         if (this.options.notices) {
                             console.log('Validator Notice: Element was set as required, but no patternCallback function was provided. Set options.notices = false to eliminate these messages.');

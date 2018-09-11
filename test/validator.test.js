@@ -121,7 +121,7 @@ describe("Test Constructor", () => {
 
 describe("Test Functionality", () => {
 
-    test("calls options.requiredCallback when required test fails", async () => {
+    test("calls options.requiredCallback with inputElement when required test fails", async () => {
 
         let input = document.createElement('input');
         input.setAttribute('type', 'text');
@@ -133,7 +133,7 @@ describe("Test Functionality", () => {
         input.focus();
         input.blur();
 
-        expect(testCallback).toHaveBeenCalled();
+        expect(testCallback).toHaveBeenCalledWith(input);
 
     });
 
@@ -154,7 +154,7 @@ describe("Test Functionality", () => {
 
     });
 
-    test("calls options.patternCallback when pattern test fails", async () => {
+    test("calls options.patternCallback with inputElement when pattern test fails", async () => {
 
         let input = document.createElement('input');
         input.setAttribute('type', 'text');
@@ -167,7 +167,7 @@ describe("Test Functionality", () => {
         input.value = '111';
         input.blur();
 
-        expect(testCallback).toHaveBeenCalled();
+        expect(testCallback).toHaveBeenCalledWith(input);
 
     });
 
