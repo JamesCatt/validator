@@ -30,3 +30,5 @@ gulp.task('default', ['test'], () => {
     });
 
 });
+
+var watcher = gulp.watch('js/**', ['default']);
