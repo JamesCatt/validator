@@ -16,7 +16,6 @@ gulp.task('default', () => {
         }),
         uglify(),
         rename('validator.min.js'),
-        gulp.dest('test'),
         gulp.dest('dist'),
 
     ],

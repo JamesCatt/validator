@@ -188,6 +188,27 @@ describe("Test Functionality", () => {
 
     });
 
+    test("does not call options.patternCallback when required test fails", async () => {
+
+        let input = document.createElement('input');
+        input.setAttribute('type', 'text');
+        const testRequiredCallback = jest.fn();
+        const testPatternCallback = jest.fn();
+        let callbackTest = new Validator(input, {
+            required: true,
+            requiredCallback: testRequiredCallback,
+            pattern: '^[a-z]+$',
+            patternCallback: testPatternCallback,
+        });
+        input.focus();
+        input.value = '';
+        input.blur();
+
+        expect(testRequiredCallback).toHaveBeenCalled();
+        expect(testPatternCallback).not.toHaveBeenCalled();
+
+    });
+
     test("does not call any callbacks after being disabled", async () => {
 
         let input = document.createElement('input');

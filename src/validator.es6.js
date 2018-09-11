@@ -70,6 +70,7 @@
                         console.log('Validator Notice: Element was set as required, but no requiredCallback function was provided. Set options.notices = false to eliminate these messages.');
                     }
                 }
+                return; // prevent patternCallback from firing
             }
 
             if (this.options.pattern !== null) {
