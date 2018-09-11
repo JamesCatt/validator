@@ -5,12 +5,16 @@ const uglify = require('gulp-uglify');
 const pump = require('pump');
 const rename = require('gulp-rename');
 
-gulp.task('default', () => {
+gulp.task('test', () => {
+    return gulp.src('src/validator.es6.js')
+        .pipe(jest());
+});
+
+gulp.task('default', ['test'], () => {
     
     pump([
 
         gulp.src('src/validator.es6.js'),
-        jest(),
         babel({
             presets: ['@babel/preset-env'],
         }),
