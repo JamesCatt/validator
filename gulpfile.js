@@ -14,7 +14,7 @@ gulp.task('test', () => {
         .pipe(jest());
 });
 
-gulp.task('build', ['test'], () => {
+gulp.task('default', ['test'], () => {
     
     pump([
 
@@ -35,4 +35,6 @@ gulp.task('build', ['test'], () => {
 
 });
 
-var watcher = gulp.watch(['src/**', 'test/**'], ['build']);
+gulp.task('watch', () => {
+    var watcher = gulp.watch(['src/**', 'test/**'], ['default']);
+});
