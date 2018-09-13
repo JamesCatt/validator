@@ -104,6 +104,17 @@ describe("Test Constructor", () => {
 
     });
 
+    test("has method 'enable'", async () => {
+
+        let input = document.createElement('input');
+        input.setAttribute('type', 'text');
+        input.setAttribute('required', true);
+        let funcTest = new Validator(input);
+
+        expect(funcTest.enable).toBeInstanceOf(Function);
+
+    });
+
     test("has method 'disable'", async () => {
 
         let input = document.createElement('input');
