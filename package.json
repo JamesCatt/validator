@@ -20,6 +20,7 @@
     "gulp-uglify": "^3.0.1",
     "jest": "^23.5.0",
     "jest-cli": "^23.5.0",
+    "keysim": "^2.1.0",
     "pump": "^3.0.0",
     "regenerator-runtime": "^0.12.1"
   },
@@ -37,5 +38,8 @@
     "setupFiles": [
       "<rootDir>/src/validator.es6.js"
     ]
+  },
+  "dependencies": {
+    "npm": "^6.4.1"
   }
 }

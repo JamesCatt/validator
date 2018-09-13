@@ -1,4 +1,5 @@
 //import puppeteer from "puppeteer";
+const Keysim = require('keysim'); // Used to simulate user input. Note that this only fires the events, so input value still has to be set programmatically in the tests
 
 //const TESTURL = "http://localhost:8080/test.html";
 
@@ -195,8 +196,9 @@ describe("Test Functionality", () => {
             successCallback: testSuccessCallback,
         });
         input.focus();
+        let keyboard = Keysim.Keyboard.US_ENGLISH;
         input.value = '111';
-        input.blur();
+        keyboard.dispatchEventsForInput("111", input);
 
         expect(testRequiredCallback).not.toHaveBeenCalled();
         expect(testPatternCallback).toHaveBeenCalledWith(input);
@@ -218,8 +220,9 @@ describe("Test Functionality", () => {
             successCallback: testSuccessCallback,
         });
         input.focus();
+        let keyboard = Keysim.Keyboard.US_ENGLISH;
         input.value = '111';
-        input.blur();
+        keyboard.dispatchEventsForInput("111", input);
 
         expect(testRequiredCallback).not.toHaveBeenCalled();
         expect(testPatternCallback).toHaveBeenCalledWith(input);
@@ -242,8 +245,9 @@ describe("Test Functionality", () => {
             successCallback: testSuccessCallback,
         });
         input.focus();
-        input.value = 'abc';
-        input.blur();
+        let keyboard = Keysim.Keyboard.US_ENGLISH;
+        input.value = 'test';
+        keyboard.dispatchEventsForInput("test", input);
 
         expect(testRequiredCallback).not.toHaveBeenCalled();
         expect(testPatternCallback).not.toHaveBeenCalled();
@@ -272,8 +276,9 @@ describe("Test Functionality", () => {
         expect(testRequiredCallback).not.toHaveBeenCalled();
 
         input.focus();
+        let keyboard = Keysim.Keyboard.US_ENGLISH;
         input.value = '111';
-        input.blur();
+        keyboard.dispatchEventsForInput("111", input);
 
         expect(testPatternCallback).not.toHaveBeenCalled();
         expect(testSuccessCallback).not.toHaveBeenCalled();
@@ -301,9 +306,13 @@ describe("Test Functionality", () => {
         expect(testRequiredCallback).not.toHaveBeenCalled();
 
         input.focus();
+        let keyboard = Keysim.Keyboard.US_ENGLISH;
         input.value = '111';
-        input.blur();
+        keyboard.dispatchEventsForInput("111", input);
         expect(testPatternCallback).not.toHaveBeenCalled();
+
+        input.value = 'test';
+        keyboard.dispatchEventsForInput("test", input);
         expect(testSuccessCallback).not.toHaveBeenCalled();
 
     });

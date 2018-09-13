@@ -13,6 +13,7 @@
      * @param {function} options.successCallback - Callback function if the input passes all tests. Passes inputEl as the only argument.
      * @param {boolean} options.autoInit - Automatically validate when inputEl is blurred. Defaults to true.
      * @param {boolean} options.notices - Log notices to the console of minor issues. Defaults to true.
+     * @param {boolean} options.postBlurValidate - If true, automatically rerun validation on input following a failed validation. Defaults to true.
      */
     function Validator (inputEl, options) {
     
@@ -41,6 +42,8 @@
         if (this.options.pattern === null && this.options.required !== true) {
             throw new Error('either pattern must be set or field must be required');
         }
+
+
 
         // We need a bound reference to validate in order to access options when it's called on the blur event
         // Note that this must be bound before enable() is called
@@ -121,17 +124,19 @@
         },
 
         /**
-         * Enables blur-triggered validation
+         * Enables input-triggered validation
          */
         enable: function() {
             this.disable(); // Disable any previous instances in case this was called by mistake
-            this.inputEl.addEventListener('blur', this.val);
+            this.inputEl.addEventListener('input', this.val);
+            this.inputEl.addEventListener('blur', this.val); // blur event listener is needed to catch the user moving past the field without entering anything
         },
 
         /**
-         * Disables blur-triggered validation
+         * Disables input-triggered validation
          */
         disable: function() {
+            this.inputEl.removeEventListener('input', this.val);
             this.inputEl.removeEventListener('blur', this.val);
         },
 
