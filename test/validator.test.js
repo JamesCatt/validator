@@ -135,7 +135,7 @@ describe("Test Constructor", () => {
 
 describe("Test Functionality", () => {
 
-    test("calls only options.requiredCallback with inputElement when required attribute set and test fails", async () => {
+    test("calls (only) options.requiredCallback with correct arguments when required attribute set and test fails", async () => {
 
         let input = document.createElement('input');
         input.setAttribute('type', 'text');
@@ -152,13 +152,13 @@ describe("Test Functionality", () => {
         input.focus();
         input.blur();
 
-        expect(testRequiredCallback).toHaveBeenCalledWith(input);
+        expect(testRequiredCallback).toHaveBeenCalledWith(input, false);
         expect(testPatternCallback).not.toHaveBeenCalled();
         expect(testSuccessCallback).not.toHaveBeenCalled();
 
     });
 
-    test("calls only options.requiredCallback with inputElement when options.required set and test fails", async () => {
+    test("calls (only) options.requiredCallback with correct arguments when options.required set and test fails", async () => {
 
         let input = document.createElement('input');
         input.setAttribute('type', 'text');
@@ -175,13 +175,13 @@ describe("Test Functionality", () => {
         input.focus();
         input.blur();
 
-        expect(testRequiredCallback).toHaveBeenCalledWith(input);
+        expect(testRequiredCallback).toHaveBeenCalledWith(input, false);
         expect(testPatternCallback).not.toHaveBeenCalled();
         expect(testSuccessCallback).not.toHaveBeenCalled();
 
     });
 
-    test("calls only options.patternCallback with inputElement when pattern attribute set and test fails", async () => {
+    test("calls (only) options.patternCallback with correct arguments when pattern attribute set and test fails", async () => {
 
         let input = document.createElement('input');
         input.setAttribute('type', 'text');
@@ -201,12 +201,14 @@ describe("Test Functionality", () => {
         keyboard.dispatchEventsForInput("111", input);
 
         expect(testRequiredCallback).not.toHaveBeenCalled();
-        expect(testPatternCallback).toHaveBeenCalledWith(input);
+        expect(testPatternCallback).toHaveBeenNthCalledWith(1, input, true);
+        expect(testPatternCallback).toHaveBeenNthCalledWith(2, input, true);
+        expect(testPatternCallback).toHaveBeenNthCalledWith(3, input, true);
         expect(testSuccessCallback).not.toHaveBeenCalled();
 
     });
 
-    test("calls only options.patternCallback with inputElement when options.pattern set and test fails", async () => {
+    test("calls (only) options.patternCallback with correct arguments when options.pattern set and test fails", async () => {
 
         let input = document.createElement('input');
         input.setAttribute('type', 'text');
@@ -225,12 +227,14 @@ describe("Test Functionality", () => {
         keyboard.dispatchEventsForInput("111", input);
 
         expect(testRequiredCallback).not.toHaveBeenCalled();
-        expect(testPatternCallback).toHaveBeenCalledWith(input);
+        expect(testPatternCallback).toHaveBeenNthCalledWith(1, input, true);
+        expect(testPatternCallback).toHaveBeenNthCalledWith(2, input, true);
+        expect(testPatternCallback).toHaveBeenNthCalledWith(3, input, true);
         expect(testSuccessCallback).not.toHaveBeenCalled();
 
     });
 
-    test("calls only options.successCallback with inputElement when all tests pass", async () => {
+    test("calls (only) options.successCallback with correct arguments when all tests pass", async () => {
 
         let input = document.createElement('input');
         input.setAttribute('type', 'text');
@@ -251,7 +255,10 @@ describe("Test Functionality", () => {
 
         expect(testRequiredCallback).not.toHaveBeenCalled();
         expect(testPatternCallback).not.toHaveBeenCalled();
-        expect(testSuccessCallback).toHaveBeenCalledWith(input);
+        expect(testSuccessCallback).toHaveBeenNthCalledWith(1, input, true);
+        expect(testSuccessCallback).toHaveBeenNthCalledWith(2, input, false);
+        expect(testSuccessCallback).toHaveBeenNthCalledWith(3, input, false);
+        expect(testSuccessCallback).toHaveBeenNthCalledWith(4, input, false);
 
     });
 
